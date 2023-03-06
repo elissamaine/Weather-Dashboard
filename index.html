@@ -27,9 +27,14 @@
       </section>
       
       <!--this section is the part on the right that displayes the weather for the searched city-->
-      <section class="city-weather col-8 p-2">
-        <section id="current-weather" class="weather-now row">
-
+      <section class="city-weather col-8 p-2 ">
+        <section id="current-weather" class="weather-now row hide">
+          <h2 id="city-name"></h2>
+          <img id="weather-icon"/>
+          <h1>Temp: <span id="temp"></span>°F</h1>
+          <h3 id="date"></h3>
+          <h3>Humidity: <span id="humidity"></span>%</h3>
+          <h3>Wind Speed: <span id="wind-speed"></span>mph</h3>
         </section>
         
         <section id="forcast-weather" class="weather-forcast row">
@@ -37,7 +42,8 @@
         </section>
       </section>
     </main>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>

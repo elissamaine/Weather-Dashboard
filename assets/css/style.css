@@ -5,3 +5,11 @@
   --tan: rgb(253, 217, 181);
 
 };
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
