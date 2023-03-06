@@ -15,24 +15,24 @@
 
     <main class="row align-items-start">
       <section id="city-search" class="col-4 p-2">
-        <form id="search-form" class="form w-100">
+        <form id="search-form" class="form w-100" onsubmit="return false">
           <input id="search-input" class="form-input w-100" type="text" placeholder="Search for a City">
-          <button class="btn btn-success btn-block">Search</button>
+          <button id="search-button" class="btn btn-success btn-block">Search</button>
         </form>
       
         <!--this section will show the past cities that have been searched-->
-        <ul class="past-searches">
+        <ul id="past-searches">
 
         </ul>
       </section>
       
       <!--this section is the part on the right that displayes the weather for the searched city-->
       <section class="city-weather col-8 p-2">
-        <section class="weather-now row">
+        <section id="current-weather" class="weather-now row">
 
         </section>
         
-        <section class="weather-forcast row">
+        <section id="forcast-weather" class="weather-forcast row">
 
         </section>
       </section>
