@@ -8,11 +8,8 @@ var searchedCities = [];
 //var sampleAPI = 'http://api.openweathermap.org/geo/1.0/direct?q=Portland&limit=2&appid=9f46b29f8f812614f70bace845940332'
 //var weatherAPI = 'api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=9f46b29f8f812614f70bace845940332'
 
-
 function searchCity() {
   getLatLon();
-
-  
 }
 
 function getLatLon(city) {
@@ -31,13 +28,12 @@ function getLatLon(city) {
       currentWeather(data[0].lat, data[0].lon);
       console.log(data);
     })
-   
+    
 }
 
 
-
 function currentWeather(lat, lon) {
-  var weatherAPI = 'api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=9f46b29f8f812614f70bace845940332'
+  var weatherAPI = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=9f46b29f8f812614f70bace845940332'
   console.log(weatherAPI); 
 
   fetch(weatherAPI)
