@@ -42,9 +42,40 @@ function currentWeather(lat, lon) {
       return response.json();
     })
     .then(function(data) {
-      console.log(data)
+      console.log(data);
+      displayWeather(data);
     })
 
+};
+
+function displayWeather(data) {
+  console.log(data);
+  
+  var cityName = document.createElement('h2');
+  cityName.textContent = data.city.name;
+  console.log(cityName);
+
+  var date = document.createElement('h3');
+  date.textContent = data.list.dt;
+  console.log(date);
+
+  var weatherIcon = document.createElement('h3');
+  weatherIcon.textContent = data.weather.icon;
+  console.log(weatherIcon);
+
+  var temp = document.createElement('h1');
+  temp.textContent = data.list.main.temp;
+  console.log(temp);
+
+  var humidity = document.createElement('h3');
+  humidity.textContent = data.list.main.humidity;
+  console.log(humidity);
+
+  var windSpeed = document.createElement('h3');
+  windSpeed.textContent = data.list.wind.speed;
+  console.log(windSpeed);
+
+  
 }
 
 document.getElementById('search-button').addEventListener('click', searchCity);
