@@ -3,6 +3,11 @@ var currentWeatherEl = document.getElementById("current-weather");
 var forcastWeatherEl = document.getElementById("forcast-weather");
 var savedCitiesEl = document.getElementById("past-searches");
 
+//var savedCities = JSON.parse(localStorage.getItem("savedCities"))
+//if (savedCities == undefined) {
+//   localStorage.setItem("savedCities", JSON.stringify([]))
+//}
+
 var searchedCities = [];
 
 var todaysDate = dayjs().format('MMM D, YYYY')
@@ -13,13 +18,30 @@ var todaysDate = dayjs().format('MMM D, YYYY')
 
 function searchCity() {
   getLatLon();
+  saveCitySearch();
+}
+
+function saveCitySearch() {
+  inputCity = inputCity.value.trim();
+  console.log(inputCity);
+ 
+
+  var savedCities = []
+  savedCities.push(inputCity);
+  localStorage.setItem('savedCities', JSON.stringify(savedCities));
+
+  var storedCities = JSON.parse(localStorage.getItem('savedCities'));
+
+  var pastCityEl = createElement('button');
+  pastCityEl.setAttribute('value', storedCities)
+
+
 }
 
 function getLatLon(city) {
   inputCity = inputCity.value.trim();
   console.log(inputCity);
 
-  
 
   var geocodingAPI = 'http://api.openweathermap.org/geo/1.0/direct?q=' + inputCity + '&limit=1&appid=9f46b29f8f812614f70bace845940332'
   console.log(geocodingAPI)
@@ -82,6 +104,32 @@ function displayWeather(data) {
   console.log(windSpeed);
  
   
+  for (i=0; i<5; i++) {
+    var forcastDaysEl = document.createElement('div')
+    forcastDaysEl.classList.add('col', 'bg-success', 'rounded', 'p-1', 'm-1');
+    
+    var forcastDateEl = document.createElement('h3');
+    var forcastDate = dayjs().add(i, 'day').format('MMM D, YYYY');
+    forcastDateEl.textContent = forcastDate
+    
+    //var forcastIconEl = document.createElement('img')
+    //forcastIconEl.setAttribute('src', )
+
+    var forcastTempEl = document.createElement('h3');
+    forcastTempEl.textContent = "temp: " + + "°F"
+    console.log(forcastTempEl);
+
+    var forcastWindSpeedEl = document.createElement('p');
+    forcastWindSpeedEl.textContent = "Wind Speed: " + data + " mph"
+
+    var forcastHumidityEl = document.createElement('p');
+    forcastHumidityEl.textContent = "Humidity: " + data + "%"
+
+    forcastDaysEl.append(forcastDateEl);
+
+    forcastWeatherEl.append(forcastDaysEl);
+
+  }
 
 }
 
