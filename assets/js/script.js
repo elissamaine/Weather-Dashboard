@@ -8,8 +8,6 @@ var searchedCities = [];
 
 var todaysDate = dayjs().format('MMM D, YYYY')
 
-//var sampleAPI = 'http://api.openweathermap.org/geo/1.0/direct?q=Portland&limit=2&appid=9f46b29f8f812614f70bace845940332'
-//var weatherAPI = 'api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=9f46b29f8f812614f70bace845940332'
 
 
 function searchCity() {
@@ -19,6 +17,7 @@ function searchCity() {
 
 }
 
+//this saves the city as a button after it is entered in the input area
 function saveCitySearch() {
   inputCity = inputCity.value.trim(); 
   console.log(inputCity);
@@ -38,6 +37,7 @@ function saveCitySearch() {
     
 }
 
+//takes the input city and puts it through an api to find the lat and lon of the city
 function getLatLon() {
   var inputCity2 = JSON.parse(localStorage.getItem('savedCities')).slice(-1);
   console.log(inputCity2)
@@ -57,7 +57,7 @@ function getLatLon() {
     })
 }
 
-
+//gets data from lat and lon of the input city
 function currentWeather(lat, lon) {
   var weatherAPI = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=9f46b29f8f812614f70bace845940332'
   console.log(weatherAPI); 
@@ -74,6 +74,7 @@ function currentWeather(lat, lon) {
 
 };
 
+//this function displays all the weather data
 function displayWeather(data) {
   console.log(data);
   currentWeatherEl.setAttribute('class', 'show');
@@ -86,9 +87,10 @@ function displayWeather(data) {
   var date = document.getElementById('date');
   date.innerHTML = todaysDate;
   console.log(date);
-
+  
+  //i had trouble figuring out how to attach the icons
  // var weatherIcon = document.getElementById('weather-icon');
- // weatherIcon.setAttribute();
+ // weatherIcon.setAttribute('src', );
   //console.log(weatherIcon);
 
   var temp = document.getElementById('temp');
@@ -103,7 +105,7 @@ function displayWeather(data) {
   windSpeed.innerHTML = data.list[0].wind.speed;
   console.log(windSpeed);
  
-  
+  //rhis creates the 5 day forcast
   for (i=0; i<5; i++) {
     var forcastDaysEl = document.createElement('div')
     forcastDaysEl.classList.add('col', 'bg-success', 'rounded', 'p-1', 'm-1');
@@ -112,12 +114,12 @@ function displayWeather(data) {
     var forcastDate = dayjs().add(i, 'day').format('MMM D, YYYY');
     forcastDateEl.textContent = forcastDate
     
-    //var forcastIconEl = document.createElement('img')
-    //forcastIconEl.setAttribute('src', )
+    //i had trouble figuring out how to attach the icons
+    //var forcastIconEl = document.createElement('img');
+    //forcastIconEl.setAttribute('src', );
 
     var forcastTempEl = document.createElement('h4');
     forcastTempEl.textContent = "temp: " + data.list[8*i].main.temp + "°F"
-    console.log(forcastTempEl);
 
     var forcastWindSpeedEl = document.createElement('p');
     forcastWindSpeedEl.textContent = "Wind Speed: " + data.list[8*i].wind.speed + " mph"
