@@ -3,10 +3,6 @@ var currentWeatherEl = document.getElementById("current-weather");
 var forcastWeatherEl = document.getElementById("forcast-weather");
 var savedCitiesEl = document.getElementById("past-searches");
 
-//var savedCities = JSON.parse(localStorage.getItem("savedCities"))
-//if (savedCities == undefined) {
-//   localStorage.setItem("savedCities", JSON.stringify([]))
-//}
 
 var searchedCities = [];
 
@@ -17,12 +13,14 @@ var todaysDate = dayjs().format('MMM D, YYYY')
 
 
 function searchCity() {
+
+  saveCitySearch(); 
   getLatLon();
-  saveCitySearch();
+
 }
 
 function saveCitySearch() {
-  inputCity = inputCity.value.trim();
+  inputCity = inputCity.value.trim(); 
   console.log(inputCity);
  
 
@@ -32,18 +30,20 @@ function saveCitySearch() {
 
   var storedCities = JSON.parse(localStorage.getItem('savedCities'));
 
-  var pastCityEl = createElement('button');
-  pastCityEl.setAttribute('value', storedCities)
-
-
+  var pastCityEl = document.createElement('button');
+  pastCityEl.textContent = inputCity;
+  pastCityEl.setAttribute('value', storedCities);
+  pastCityEl.classList.add('btn', 'btn-success');
+  savedCitiesEl.append(pastCityEl);
+    
 }
 
-function getLatLon(city) {
-  inputCity = inputCity.value.trim();
-  console.log(inputCity);
+function getLatLon() {
+  var inputCity2 = JSON.parse(localStorage.getItem('savedCities')).slice(-1);
+  console.log(inputCity2)
 
 
-  var geocodingAPI = 'http://api.openweathermap.org/geo/1.0/direct?q=' + inputCity + '&limit=1&appid=9f46b29f8f812614f70bace845940332'
+  var geocodingAPI = 'http://api.openweathermap.org/geo/1.0/direct?q=' + inputCity2 + '&limit=1&appid=9f46b29f8f812614f70bace845940332'
   console.log(geocodingAPI)
 
   fetch(geocodingAPI) 
@@ -78,7 +78,7 @@ function displayWeather(data) {
   console.log(data);
   currentWeatherEl.setAttribute('class', 'show');
   
-  // these will display
+  
   var cityName = document.getElementById('city-name');
   cityName.innerHTML = data.city.name;
   console.log(cityName);
@@ -115,21 +115,28 @@ function displayWeather(data) {
     //var forcastIconEl = document.createElement('img')
     //forcastIconEl.setAttribute('src', )
 
-    var forcastTempEl = document.createElement('h3');
-    forcastTempEl.textContent = "temp: " + + "°F"
+    var forcastTempEl = document.createElement('h4');
+    forcastTempEl.textContent = "temp: " + data.list[8*i].main.temp + "°F"
     console.log(forcastTempEl);
 
     var forcastWindSpeedEl = document.createElement('p');
-    forcastWindSpeedEl.textContent = "Wind Speed: " + data + " mph"
+    forcastWindSpeedEl.textContent = "Wind Speed: " + data.list[8*i].wind.speed + " mph"
 
     var forcastHumidityEl = document.createElement('p');
-    forcastHumidityEl.textContent = "Humidity: " + data + "%"
+    forcastHumidityEl.textContent = "Humidity: " + data.list[8*i].main.humidity + "%"
 
+   forcastWeatherEl.append(forcastDaysEl);
+  
     forcastDaysEl.append(forcastDateEl);
-
-    forcastWeatherEl.append(forcastDaysEl);
-
+    //forcastDaysEl.append(forcastIconEl);
+    forcastDaysEl.append(forcastTempEl);
+    forcastDaysEl.append(forcastWindSpeedEl);
+    forcastDaysEl.append(forcastHumidityEl);
+    
+    
   }
+   
+    
 
 }
 
