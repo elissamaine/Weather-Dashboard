@@ -17,4 +17,4 @@ This weather Dashboard was is an easy to use application that allows for uses to
 ![screen shot of deployed site](./assets/images/screenshot.PNG)
 
 ## Link to Deployed Site
-
+[Deployed Site](https://elissamaine.github.io/Weather-Dashboard/)
