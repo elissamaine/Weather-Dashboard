@@ -2,6 +2,7 @@ var inputCity = document.getElementById("search-input");
 var currentWeatherEl = document.getElementById("current-weather");
 var forcastWeatherEl = document.getElementById("forcast-weather");
 var savedCitiesEl = document.getElementById("past-searches");
+var apiKey = '9f46b29f8f812614f70bace845940332'
 
 
 var searchedCities = [];
@@ -43,7 +44,7 @@ function getLatLon() {
   console.log(inputCity2)
 
 
-  var geocodingAPI = 'http://api.openweathermap.org/geo/1.0/direct?q=' + inputCity2 + '&limit=1&appid=9f46b29f8f812614f70bace845940332'
+  var geocodingAPI = 'http://api.openweathermap.org/geo/1.0/direct?q=' + inputCity2 + '&limit=1&appid=' + apiKey;
   console.log(geocodingAPI)
 
   fetch(geocodingAPI) 
@@ -59,7 +60,7 @@ function getLatLon() {
 
 //gets data from lat and lon of the input city
 function currentWeather(lat, lon) {
-  var weatherAPI = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=9f46b29f8f812614f70bace845940332'
+  var weatherAPI = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=' + apiKey;
   console.log(weatherAPI); 
 
   fetch(weatherAPI)
